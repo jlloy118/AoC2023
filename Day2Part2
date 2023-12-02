@@ -1,0 +1,70 @@
+with open(r'C:/Users/wee/Documents/ReadInAOC2.txt','r') as f:
+    input = f.readlines()
+
+#Python Part 2
+maxes = { 'Rmax': 12,
+         'Gmax':13,
+         'Bmax': 14
+}       
+finalsum = 0 
+ids = [j+1 for j,_ in enumerate(input)]
+badids = []
+powers = []
+for k,games in enumerate(input):
+    ## Loop Variables
+    maxg = 0
+    maxb = 0
+    maxr = 0
+    power = 0
+    ##
+    games = games.removeprefix(f'Game {ids[k]}: ')
+    currentid = ids[k]
+    games = games.split(';')
+    for rounds in games:
+        rounds = rounds.split(',')
+       # print(rounds)
+        for pres in rounds:
+            if pres.find('green') != -1:
+                for p,char in enumerate(pres):
+                    if not char.isdigit():
+                        continue
+                    if pres[p+1].isdigit():
+                        gnum = int(char + pres[p+1])
+                        break
+                    else:
+                        gnum = int(char)
+                        break
+                #print(gnum)
+                if gnum > maxg:
+                    maxg = gnum
+                
+            elif pres.find('blue') != -1:
+                for p,char in enumerate(pres):
+                    if not char.isdigit():
+                        continue
+                    if pres[p+1].isdigit():
+                        bnum = int(char + pres[p+1])
+                        break
+                    else:
+                        bnum = int(char)
+                        break
+                if bnum > maxb:
+                    maxb = bnum
+
+            elif pres.find('red') != -1:
+                for p,char in enumerate(pres):
+                    if not char.isdigit():
+                        continue
+                    if pres[p+1].isdigit():
+                        rnum = int(char + pres[p+1])
+                        break
+                    else:
+                        rnum = int(char)
+                        break
+                if rnum > maxr:
+                    maxr = rnum
+    power = maxb*maxr*maxg
+    powers.append(power)
+                
+print(powers)
+print(sum(powers))
