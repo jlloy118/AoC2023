@@ -1,3 +1,5 @@
+## Part 1
+
 with open(r'C:/Users/wee/Documents/ReadInAOC2.txt','r') as f:
     input = f.readlines()
 
